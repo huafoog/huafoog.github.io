@@ -1,0 +1,369 @@
+/* ============================================================
+ * RHYME LAB · 样式层
+ * 深色科技感 + 黑胶复古元素
+ * ============================================================ */
+:root {
+  --bg1:#0b0e17; --bg2:#141a2e;
+  --card:rgba(255,255,255,.045); --card-brd:rgba(255,255,255,.09);
+  --txt:#e8ecf8; --txt-dim:#8b93ad;
+  --cyan:#22d3ee; --cyan2:#38bdf8; --purple:#a78bfa;
+  --gold:#ffb020; --gold2:#f59e0b;
+  --male:#38bdf8; --female:#f472b6;
+  --font:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family:var(--font); color:var(--txt); min-height:100vh;
+  background:
+    radial-gradient(1200px 700px at 85% -10%, rgba(255,176,32,.10), transparent 60%),
+    radial-gradient(1000px 600px at -10% 20%, rgba(167,139,250,.14), transparent 55%),
+    linear-gradient(160deg, var(--bg1), var(--bg2));
+  background-attachment:fixed;
+  display:flex; flex-direction:column; align-items:center;
+  padding:18px 14px 40px;
+}
+
+/* ===== Header ===== */
+header { width:100%; max-width:1180px; display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.logo { display:flex; align-items:center; gap:12px; }
+.vinyl {
+  width:42px; height:42px; border-radius:50%; position:relative; flex:none;
+  background:radial-gradient(circle at 50% 50%, #1a1f35 12%, #0b0e17 13%, #171c30 26%, #0d1120 27%, #151a2e 40%, #0a0d1a 41%, #131830 52%, #0a0d1a 53%, #11152a 65%, #090c18 66%, #10142a 78%, #090c18 79%, #0e1226 92%, #080b16 93%, #0c101f 100%);
+  box-shadow:0 4px 18px rgba(255,176,32,.25);
+  animation:vinylSpin 6s linear infinite;
+}
+@keyframes vinylSpin { from{ transform:rotate(0);} to{ transform:rotate(360deg);} }
+.vinyl-label {
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:14px; height:14px; border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#0b0e17; font-size:8px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+.logo h1 { font-size:20px; font-weight:800; letter-spacing:1px; }
+.logo h1 b { color:var(--gold); }
+.logo small { display:block; color:var(--txt-dim); font-size:11px; letter-spacing:1.5px; margin-top:2px; }
+.header-status { font-size:12px; color:var(--txt-dim); padding:6px 12px; border:1px solid var(--card-brd); border-radius:20px; background:var(--card); }
+.header-status b { color:var(--gold); font-weight:700; }
+
+/* ===== 主布局 ===== */
+main { width:100%; max-width:1180px; display:grid; grid-template-columns:400px 1fr; gap:16px; align-items:start; }
+.card { background:var(--card); border:1px solid var(--card-brd); border-radius:18px; padding:18px; backdrop-filter:blur(12px); }
+.card h3 { font-size:13px; font-weight:600; color:var(--txt-dim); letter-spacing:2px; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.card h3 .dot { width:6px; height:6px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--purple)); }
+
+/* ===== 表单 ===== */
+.field { margin-bottom:14px; }
+.field label { display:block; font-size:12px; color:var(--txt-dim); letter-spacing:1.5px; margin-bottom:8px; }
+.field input[type=text] {
+  width:100%; padding:11px 14px; border-radius:12px;
+  background:rgba(11,14,23,.55); border:1px solid var(--card-brd);
+  color:var(--txt); font-size:14px; font-family:inherit; outline:none;
+  transition:border-color .12s, box-shadow .12s;
+}
+.field input[type=text]:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(255,176,32,.12); }
+.field input[type=text]::placeholder { color:#5a637d; }
+
+.chips { display:flex; flex-wrap:wrap; gap:8px; }
+.chip {
+  padding:8px 13px; border-radius:22px; cursor:pointer;
+  background:rgba(255,255,255,.05); border:1px solid var(--card-brd);
+  color:var(--txt); font-size:12.5px; font-weight:600; font-family:inherit;
+  transition:border-color .12s, background .12s, transform .12s, color .12s;
+}
+.chip .meta { display:block; font-size:10px; color:var(--txt-dim); font-weight:400; margin-top:2px; }
+.chip:hover { border-color:var(--gold); transform:translateY(-1px); }
+.chip:active { transform:scale(.95); }
+.chip.sel {
+  background:linear-gradient(135deg, rgba(255,176,32,.16), rgba(167,139,250,.16));
+  border-color:var(--gold); color:var(--gold);
+}
+.chip.sel .meta { color:rgba(255,176,32,.75); }
+
+.param-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.field select {
+  width:100%; padding:10px 12px; border-radius:11px;
+  background:rgba(11,14,23,.55); border:1px solid var(--card-brd);
+  color:var(--txt); font-size:13px; font-family:inherit; outline:none;
+  transition:border-color .12s;
+}
+.field select:focus { border-color:var(--gold); }
+.field select option { background:#141a2e; color:var(--txt); }
+
+/* ===== 生成按钮 ===== */
+.gen-btn {
+  width:100%; margin-top:4px; padding:15px; border:none; border-radius:40px; cursor:pointer;
+  font-size:16px; font-weight:800; font-family:inherit; letter-spacing:2px; color:#0b0e17;
+  background:linear-gradient(135deg, var(--gold), var(--gold2));
+  box-shadow:0 6px 24px rgba(255,176,32,.35);
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  transition:transform .12s, box-shadow .12s, filter .12s;
+}
+.gen-btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.gen-btn:active { transform:scale(.97); }
+.gen-btn.generating { animation:btnPulse .8s ease-in-out infinite; }
+@keyframes btnPulse { 0%,100%{ filter:brightness(1);} 50%{ filter:brightness(1.2);} }
+.hint-line { font-size:11px; color:var(--txt-dim); text-align:center; margin-top:10px; line-height:1.6; }
+
+/* ===== 歌词舞台 ===== */
+.stage { min-height:560px; display:flex; flex-direction:column; }
+.stage-head { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+.stage-head h2 { font-size:20px; font-weight:800; letter-spacing:1px; color:var(--gold); }
+.tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+.tag {
+  font-size:11px; padding:4px 10px; border-radius:14px;
+  background:rgba(255,255,255,.06); border:1px solid var(--card-brd);
+  color:var(--txt-dim); letter-spacing:.5px;
+}
+.tag b { color:var(--cyan2); font-weight:700; }
+.tag.rhyme-tag { border-color:rgba(255,176,32,.35); color:var(--gold); }
+.stage-actions { display:flex; gap:8px; }
+.mini-btn {
+  padding:8px 14px; border-radius:10px; cursor:pointer; font-size:12px;
+  background:rgba(255,255,255,.05); border:1px solid var(--card-brd); color:var(--txt-dim);
+  font-family:inherit; transition:border-color .12s, color .12s, transform .12s, background .12s;
+}
+.mini-btn:hover { border-color:var(--gold); color:var(--txt); background:rgba(255,176,32,.08); }
+.mini-btn:active { transform:scale(.95); }
+
+/* ===== 歌词渲染 ===== */
+.lyrics { flex:1; display:flex; flex-direction:column; gap:2px; }
+.empty {
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:18px; color:var(--txt-dim); font-size:14px; text-align:center; line-height:1.9;
+  padding:40px 0;
+}
+.empty-vinyl {
+  width:110px; height:110px; border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, #1a1f35 10%, #0b0e17 11%, #171c30 24%, #0d1120 25%, #151a2e 38%, #0a0d1a 39%, #131830 50%, #0a0d1a 51%, #11152a 63%, #090c18 64%, #10142a 76%, #090c18 77%, #0e1226 90%, #080b16 91%, #0c101f 100%);
+  animation:vinylSpin 8s linear infinite;
+  box-shadow:0 10px 40px rgba(255,176,32,.15);
+  position:relative;
+}
+.empty-vinyl::after {
+  content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:26px; height:26px; border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+}
+
+.line {
+  padding:7px 12px; border-radius:10px; font-size:14.5px; line-height:1.75;
+  animation:lineIn .45s cubic-bezier(.16,1,.3,1) both;
+  position:relative;
+  transition:background .12s;
+}
+.line:hover { background:rgba(255,255,255,.035); }
+@keyframes lineIn { from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:translateY(0);} }
+
+.line .role {
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:10px; font-weight:700; letter-spacing:1px; margin-right:8px;
+  padding:1.5px 7px; border-radius:8px; vertical-align:1px; flex:none;
+}
+.role.male { color:var(--male); border:1px solid rgba(56,189,248,.35); background:rgba(56,189,248,.08); }
+.role.female { color:var(--female); border:1px solid rgba(244,114,182,.35); background:rgba(244,114,182,.08); }
+
+.line .rhyme-word {
+  color:var(--gold); font-weight:800;
+  border-bottom:2px solid rgba(255,176,32,.55);
+  padding-bottom:1px;
+}
+
+.line.tag {
+  font-size:11px; color:var(--txt-dim); letter-spacing:2px;
+  border-top:1px dashed rgba(255,255,255,.08); margin-top:8px; padding-top:10px;
+  animation:none;
+}
+
+/* ===== Footer / Toast ===== */
+footer { margin-top:20px; font-size:12px; color:var(--txt-dim); text-align:center; line-height:1.9; }
+
+.toast {
+  position:fixed; left:50%; bottom:34px; transform:translateX(-50%) translateY(20px);
+  background:rgba(20,26,46,.95); border:1px solid var(--card-brd); color:var(--txt);
+  padding:10px 20px; border-radius:30px; font-size:13px; opacity:0; pointer-events:none;
+  transition:opacity .25s, transform .25s; z-index:99; box-shadow:0 8px 30px rgba(0,0,0,.4);
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ===== 响应式 ===== */
+@media (max-width:900px) {
+  main { grid-template-columns:1fr; }
+  .stage { min-height:auto; }
+}
+@media (max-width:560px) {
+  .param-grid { grid-template-columns:1fr; }
+  .stage-head h2 { font-size:17px; }
+  .line { font-size:13.5px; }
+  .stage-actions { width:100%; }
+  .stage-actions .mini-btn { flex:1; text-align:center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vinyl, .empty-vinyl { animation:none; }
+  .line { animation:none; }
+}
+
+/* ============================================================
+ * 旋律参考
+ * ============================================================ */
+.melody {
+  margin-top:16px; padding-top:16px;
+  border-top:1px dashed rgba(255,255,255,.08);
+}
+.melody-head {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap; margin-bottom:12px;
+}
+.melody-title { display:flex; align-items:center; gap:10px; }
+.melody-icon {
+  width:34px; height:34px; border-radius:10px; flex:none;
+  background:linear-gradient(135deg, rgba(34,211,238,.2), rgba(167,139,250,.2));
+  border:1px solid rgba(34,211,238,.35);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--cyan2); font-size:17px;
+}
+.melody-title b { display:block; font-size:14px; letter-spacing:1px; }
+.melody-title small { display:block; color:var(--txt-dim); font-size:11px; margin-top:2px; }
+.melody-controls { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.melody-select {
+  padding:8px 10px; border-radius:10px;
+  background:rgba(11,14,23,.55); border:1px solid var(--card-brd);
+  color:var(--txt); font-size:12px; font-family:inherit; outline:none;
+  transition:border-color .12s;
+}
+.melody-select:focus { border-color:var(--cyan2); }
+.melody-select option { background:#141a2e; color:var(--txt); }
+
+.drum-toggle {
+  display:flex; align-items:center; gap:6px;
+  font-size:12px; color:var(--txt-dim); cursor:pointer;
+  padding:8px 12px; border-radius:10px;
+  background:rgba(255,255,255,.05); border:1px solid var(--card-brd);
+  user-select:none;
+}
+.drum-toggle input { accent-color:var(--gold); cursor:pointer; }
+
+.melody-play {
+  border-color:rgba(34,211,238,.45); color:var(--cyan2);
+  font-weight:700; padding:8px 18px;
+}
+.melody-play:hover { border-color:var(--cyan2); background:rgba(34,211,238,.12); color:var(--cyan2); }
+.melody-play.playing { border-color:rgba(255,77,109,.5); color:#ff4d6d; }
+
+/* ===== 钢琴卷帘 ===== */
+.piano-roll {
+  position:relative; border:1px solid var(--card-brd); border-radius:14px;
+  background:rgba(11,14,23,.5); padding:10px;
+  display:flex; flex-direction:column; gap:6px;
+  max-height:340px; overflow-y:auto;
+}
+.pr-row { display:flex; align-items:center; gap:10px; position:relative; }
+.pr-row.pr-f { filter:drop-shadow(0 0 4px rgba(244,114,182,.25)); }
+.pr-label {
+  flex:none; width:150px; font-size:11px; color:var(--txt-dim);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  padding:2px 0;
+}
+.pr-track {
+  position:relative; flex:1; height:34px; border-radius:8px;
+  background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.pr-note {
+  position:absolute; border-radius:3px;
+  background:linear-gradient(180deg, var(--cyan2), #0ea5c9);
+  box-shadow:0 0 6px rgba(56,189,248,.35);
+  transition:transform .1s, box-shadow .1s;
+}
+.pr-f .pr-note { background:linear-gradient(180deg, var(--female), #be4286); box-shadow:0 0 6px rgba(244,114,182,.4); }
+.pr-note.pr-root { background:linear-gradient(180deg, var(--gold), var(--gold2)); box-shadow:0 0 8px rgba(255,176,32,.5); }
+.pr-row.pr-active .pr-note { transform:scaleY(1.25); box-shadow:0 0 12px rgba(56,189,248,.8); }
+.pr-row.pr-active { background:rgba(56,189,248,.06); border-radius:8px; }
+
+.pr-cursor {
+  position:absolute; top:0; bottom:0; width:2px; z-index:5;
+  background:linear-gradient(180deg, var(--gold), transparent);
+  box-shadow:0 0 8px rgba(255,176,32,.6);
+  display:none; pointer-events:none;
+  transition:left .1s linear;
+}
+
+/* 歌词行播放高亮 */
+.line.playing {
+  background:rgba(34,211,238,.09);
+  box-shadow:inset 3px 0 0 var(--cyan2);
+}
+
+/* ===== 音频自检区 ===== */
+.audio-diag {
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 0 12px; padding:8px 12px;
+  background:rgba(11,14,23,.4); border:1px solid var(--card-brd); border-radius:12px;
+}
+.diag-meter {
+  flex:1; min-width:80px; height:8px; border-radius:5px;
+  background:rgba(255,255,255,.08); overflow:hidden; position:relative;
+}
+.meter-bar {
+  position:absolute; left:0; top:0; bottom:0; width:0%;
+  background:linear-gradient(90deg, var(--cyan2), var(--gold));
+  border-radius:5px; transition:width .08s linear;
+  box-shadow:0 0 8px rgba(56,189,248,.5);
+}
+.diag-text { font-size:11px; color:var(--txt-dim); white-space:nowrap; }
+.diag-text.active { color:var(--gold); }
+.diag-btn { flex:none; }
+.diag-btn.playing { border-color:var(--gold); color:var(--gold); }
+
+/* ===== 节拍标注 ===== */
+.beat-pos {
+  font-size:11px; color:var(--cyan2); font-weight:600;
+  padding:4px 10px; border-radius:10px;
+  background:rgba(34,211,238,.08); border:1px solid rgba(34,211,238,.3);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.beat-legend {
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  font-size:11px; color:var(--txt-dim); margin-bottom:10px; padding:0 2px;
+}
+.beat-legend .lg {
+  display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:4px; vertical-align:-1px;
+}
+.beat-legend .lg.onbeat { background:var(--gold); box-shadow:0 0 5px rgba(255,176,32,.5); }
+.beat-legend .lg.offbeat { background:var(--cyan2); box-shadow:0 0 5px rgba(56,189,248,.5); }
+.beat-legend .hint { opacity:.75; }
+
+/* 歌词行节拍徽章 */
+.beat-badge {
+  border:none !important; background:none !important;
+  font-size:10px; font-weight:700; letter-spacing:1px; padding:1.5px 7px;
+}
+.beat-badge.on { color:var(--gold); border:1px solid rgba(255,176,32,.4) !important; background:rgba(255,176,32,.1) !important; }
+.beat-badge.off { color:var(--cyan2); border:1px solid rgba(56,189,248,.4) !important; background:rgba(56,189,248,.1) !important; }
+.beat-badge:empty { display:none; }
+
+/* 钢琴卷帘节拍网格线 */
+.pr-gridline {
+  position:absolute; top:0; bottom:0; width:1px; pointer-events:none; z-index:1;
+  background:rgba(255,255,255,.10);
+}
+.pr-gridline.on { background:rgba(255,176,32,.28); }
+.pr-gridline.off { background:rgba(56,189,248,.18); }
+
+/* 反拍音符：空心描边样式 */
+.pr-note.pr-off {
+  background:transparent !important;
+  border:1.5px solid var(--cyan2);
+  box-shadow:none !important;
+}
+.pr-f .pr-note.pr-off { border-color:var(--female); }
+.pr-note.pr-off.pr-root { border-color:var(--gold); background:transparent !important; }
+.pr-row.pr-active .pr-note.pr-off { border-color:#fff; }
+
+/* 响应式：小屏标签行压缩 */
+@media (max-width:560px) {
+  .pr-label { width:90px; font-size:10px; }
+  .melody-controls { width:100%; }
+  .melody-controls .melody-select { flex:1; min-width:0; }
+}
