@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>青杉韵脚工坊 · 说唱歌词生成器</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23111'/></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="vinyl" id="vinylSpin">
+      <div class="vinyl-groove"></div>
+      <div class="vinyl-label">青</div>
+    </div>
+    <div>
+      <h1>青杉韵脚工坊</h1>
+      <small>QINGSHAN RHYME LAB · 中文说唱歌词生成器</small>
+    </div>
+  </div>
+  <div class="header-status">十三辙押韵引擎 <b>v1.1 · 旋律参考</b></div>
+</header>
+
+<main>
+  <!-- ============ 控制台 ============ -->
+  <section class="card console">
+    <h3><span class="dot"></span>创作设置</h3>
+
+    <div class="field">
+      <label for="themeInput">主题 / 关键词</label>
+      <input type="text" id="themeInput" placeholder="例：熬到天亮、梦想、街头、深夜奋斗…" maxlength="20">
+      <div class="chips" id="themeChips">
+        <button class="chip" data-theme="熬夜到天亮">🌙 熬夜到天亮</button>
+        <button class="chip" data-theme="梦想">🔥 梦想</button>
+        <button class="chip" data-theme="街头">🏙 街头</button>
+        <button class="chip" data-theme="兄弟">🤝 兄弟</button>
+        <button class="chip" data-theme="向阳而生">🌻 向阳而生</button>
+        <button class="chip" data-theme="爱情">💗 爱情</button>
+        <button class="chip" data-theme="家乡">🏠 家乡</button>
+        <button class="chip" data-theme="时间">⏳ 时间</button>
+        <button class="chip" data-theme="舞台说唱">🎤 舞台说唱</button>
+        <button class="chip" data-theme="自由">🕊 自由</button>
+        <button class="chip" data-theme="坚持">⛰ 坚持</button>
+        <button class="chip" data-theme="记忆">📼 记忆</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>曲风</label>
+      <div class="chips" id="styleChips">
+        <button class="chip sel" data-style="oldschool">Old School<span class="meta">86 BPM · 经典叙事</span></button>
+        <button class="chip" data-style="boombap">Boom Bap<span class="meta">90 BPM · 街头硬朗</span></button>
+        <button class="chip" data-style="trap">Trap<span class="meta">140 BPM · 暗涌</span></button>
+        <button class="chip" data-style="melody">旋律说唱<span class="meta">92 BPM · 走心</span></button>
+        <button class="chip" data-style="lofi">Lo-fi<span class="meta">78 BPM · 慵懒</span></button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>人声结构</label>
+      <div class="chips" id="voiceChips">
+        <button class="chip sel" data-voice="duet">男说女唱<span class="meta">Verse男声 · Hook女声</span></button>
+        <button class="chip" data-voice="male">纯男声<span class="meta">低沉说唱</span></button>
+        <button class="chip" data-voice="female">纯女声<span class="meta">旋律说唱</span></button>
+      </div>
+    </div>
+
+    <div class="param-grid">
+      <div class="field">
+        <label>押韵方式</label>
+        <select id="rhymeMode">
+          <option value="every">句句押韵（工整）</option>
+          <option value="alt">隔句押韵（自由）</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>歌词长度</label>
+        <select id="lengthSelect">
+          <option value="short">精简（约 20 行）</option>
+          <option value="standard" selected>标准（约 30 行）</option>
+          <option value="full">完整（约 40 行）</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>韵辙（可指定）</label>
+        <select id="rhymeSelect">
+          <option value="">自动选辙（推荐）</option>
+          <option value="jiangyang">江阳辙 · ang（开阔激昂）</option>
+          <option value="yanqian">言前辙 · an（明亮悠扬）</option>
+          <option value="ranchen">人辰辙 · en（内敛深沉）</option>
+          <option value="yiqi">一七辙 · i（细腻入微）</option>
+          <option value="hulai">怀来辙 · ai（热烈敞开）</option>
+          <option value="fahua">发花辙 · a（开阔明亮）</option>
+          <option value="suobo">梭波辙 · o（沉稳厚重）</option>
+          <option value="miexie">乜斜辙 · ie（清冷决绝）</option>
+          <option value="gusu">姑苏辙 · u（深沉含蓄）</option>
+          <option value="huidui">灰堆辙 · ei（低回婉转）</option>
+          <option value="yaotiao">遥条辙 · ao（高亢洒脱）</option>
+          <option value="youqiu">由求辙 · ou（绵长悠远）</option>
+          <option value="zhongdong">中东辙 · eng（浑厚有力）</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="gen-btn" id="genBtn">
+      <span class="gen-icon">◉</span> 生成歌词
+    </button>
+    <p class="hint-line">点击「生成」会即兴组合句式与韵脚 · 多按几次找灵感</p>
+  </section>
+
+  <!-- ============ 歌词舞台 ============ -->
+  <section class="card stage">
+    <div class="stage-head">
+      <div>
+        <h2 id="songTitle">等待灵感…</h2>
+        <div class="tags" id="songTags"></div>
+      </div>
+      <div class="stage-actions">
+        <button class="mini-btn" id="copyBtn">⧉ 复制</button>
+        <button class="mini-btn" id="downloadBtn">⇩ 下载</button>
+        <button class="mini-btn" id="diceBtn" title="随机灵感">⚄ 换一批</button>
+      </div>
+    </div>
+
+    <div class="lyrics" id="lyricsBox">
+      <div class="empty">
+        <div class="empty-vinyl"></div>
+        <p>输入主题，点击「生成歌词」<br>得到一首句句押韵的中文说唱</p>
+      </div>
+    </div>
+
+    <!-- ============ 旋律参考 ============ -->
+    <div class="melody" id="melodyBox" style="display:none;">
+      <div class="melody-head">
+        <div class="melody-title">
+          <span class="melody-icon">♩</span>
+          <div>
+            <b>旋律参考</b>
+            <small>根据歌词字数与韵脚自动编配 · 可试听找 flow 感觉</small>
+          </div>
+        </div>
+        <div class="melody-controls">
+          <select id="scaleSelect" class="melody-select">
+            <option value="minor">小调（感伤走心）</option>
+            <option value="major">大调（明亮积极）</option>
+            <option value="pentatonic" selected>五声音阶（中国风）</option>
+            <option value="blues">布鲁斯（街头感）</option>
+          </select>
+          <select id="toneSelect" class="melody-select">
+            <option value="piano" selected>钢琴</option>
+            <option value="epiano">电钢</option>
+            <option value="pluck">拨弦</option>
+            <option value="pad">柔音垫</option>
+          </select>
+          <label class="drum-toggle">
+            <input type="checkbox" id="drumToggle" checked>
+            <span>鼓点</span>
+          </label>
+          <button class="mini-btn melody-play" id="melodyPlayBtn">▶ 试听</button>
+        </div>
+      </div>
+      <div class="audio-diag" id="audioDiag">
+        <div class="diag-meter">
+          <div class="meter-bar" id="meterBar"></div>
+        </div>
+        <span class="diag-text" id="diagText">音频状态：未激活</span>
+        <span class="beat-pos" id="beatPos" title="当前播放位置的小节与拍位">小节 1 · 第 1 拍</span>
+        <button class="mini-btn diag-btn" id="testToneBtn">播放测试音</button>
+      </div>
+      <div class="beat-legend">
+        <span><i class="lg onbeat"></i>正拍</span>
+        <span><i class="lg offbeat"></i>反拍</span>
+        <span class="hint">每行徽章表示「正拍起 / 反拍起」· 网格线为 4/4 拍位</span>
+      </div>
+      <div class="piano-roll" id="pianoRoll"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  青杉韵脚工坊 · 内置中文说唱十三辙押韵词库 · 支持男说女唱结构 · 旋律参考按歌词自动编配<br>
+  可指定韵辙 · 自动匹配主题意象 · 句句尾韵 · 生成结果仅供创作参考
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/melody.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
